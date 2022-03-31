@@ -33,7 +33,6 @@ class SearchType extends AbstractType {
                 'label' => 'Filtrer',
                 'attr' => [
                     'class' => 'btn-block btn-info',
-
                 ]
             ])
         ;
