@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}S'inscrire - BIGDEAL{% endblock %}
+
+{% block content %}
+    <div class="block-small">
+        <h1>Inscription</h1>
+        {% if notification_valid  %}
+            <div class="alert alert-success" role="alert">
+                <h4 class="alert-heading">Succès !</h4>
+                <p>{{ notification_valid }}</p>
+                <hr>
+                <a href="{{ path('app_login') }}" class="mb-0">Cliquez ici</a> pour vous connecter.
+            </div>
+        {% endif %}
+        {{ form(form) }}
+        <hr>
+        <p class="text-center">Vous avez déjà un compte ? <a href="{{ path('app_login') }}">Connectez-vous</a></p>
+    </div>
+{% endblock %}

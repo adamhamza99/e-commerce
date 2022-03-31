@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Valider ma commande - BIGDEAL{% endblock %}
+
+{% block content %}
+    <h2>Je passe ma commande</h2>
+    Choisissez vos préférences avant de passer votre commande sur BIGDEAL.
+    <p><a href="{{ path('cart') }}">Retournez à mon panier</a></p>
+    <hr>
+    <div class="row">
+        <div class="col-md-6">
+            {% set formHtml %}
+                {{ form_start(form, {action:path('order_recap')}) }}
+                {{ form_label(form.addresses, 'Choisissez votre adresse de livraison') }}
+                <a href="{{ path('account_address_add') }}" class="btn  btn-info">Ajoutez une adresse</a>
+                {{ form_end(form) }}
+            {% endset %}
+            {{ formHtml|replace({'[br]' : '<br/>'})|raw }}
+        </div>
+        <div class="col-md-6">
+            <div class="text-center">
+                <b>Récapitulatif de ma commande</b>
+            </div>
+            <div class="order-summary">
+                {% set total = null %}
+                {% set quantity = null %}
+                {% for key, product in cart %}
+                    <div class="row {% if key > 0 %}mt-2{% endif %}">
+                        <div class="col-2">
+                            <img src="uploads/{{ product.product.illustration }}" alt="{{ product.product.name }}" height="75px">
+                        </div>
+                        <div class="col-8 my-auto">
+                            {{ product.product.name }}<br/>
+                            <small>{{ product.product.subtitle }}</small>
+                        </div>
+                        <div class="col-2 my-auto">
+                            x {{ product.quantity }}
+                        </div>
+                    </div>
+                    <br/>
+                    {% set total = total + (product.product.price * product.quantity) %}
+                    {% set quantity = quantity + (product.quantity) %}
+                {% endfor %}
+            </div>
+            <div class="text-right">
+                <b>Nombre de produit :</b> {{ quantity }} <br/>
+                <b>Total de mon panier :</b> {{ (total / 100)| number_format(2, ',', '.')}} €
+            </div>
+        </div>
+    </div>
+{% endblock %}
