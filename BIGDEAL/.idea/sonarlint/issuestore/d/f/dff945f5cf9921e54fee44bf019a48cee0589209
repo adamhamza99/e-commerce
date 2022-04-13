@@ -1,0 +1,7 @@
+
+MWeb:TableWithoutCaptionCheck
+" Add a description to this table.(Òó‰œûÿÿÿÿ
+l Web:TableHeaderHasIdOrScopeCheck";Add either an 'id' or a 'scope' attribute to this <th> tag.(™À§ãÿÿÿÿÿ
+GWeb:BoldAndItalicTagsCheck8"!Replace this <b> tag by <strong>.(ÁÉ¸ž
+GWeb:BoldAndItalicTagsCheck9"!Replace this <b> tag by <strong>.(úïþë
+LWeb:BoldAndItalicTagsCheck>"!Replace this <b> tag by <strong>.(ÖüÎÞýÿÿÿÿ

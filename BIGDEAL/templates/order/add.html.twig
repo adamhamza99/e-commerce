@@ -53,7 +53,7 @@
             </div>
             <hr>
             <b>Total :</b> {{ ((total / 100) + carrier.price) | number_format(2, ',', '.')}} €
-            <a href="" class="btn btn-success btn-block mt-3">Payez | {{ ((total / 100) + carrier.price) | number_format(2, ',', '.')}} €</a>
+            <a href="{{ path('order_confirm') }}" class="btn btn-success btn-block mt-3">Payez | {{ ((total / 100) + carrier.price) | number_format(2, ',', '.')}} €</a>
         </div>
     </div>
 {% endblock %}

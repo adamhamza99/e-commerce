@@ -1,0 +1,6 @@
+
+^	php:S1117{"IRename "$roles" which has the same name as the field declared at line 39.(‹÷¡×
+z	php:S1448"`Class "User" has 24 methods, which is greater than 20 authorized. Split it into smaller classes.(¦Ãÿ¿øÿÿÿÿ
+E	php:S1066ß"/Merge this if statement with the enclosing one.(˜’â
+J	php:S1066ı"/Merge this if statement with the enclosing one.(Ë“Ï’ÿÿÿÿÿ
+|	php:S4144q"bUpdate this method so that its implementation is not identical to "getUserIdentifier" on line 105.(¿††òıÿÿÿÿ

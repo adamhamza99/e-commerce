@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\OrderDetailsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=OrderDetailsRepository::class)
@@ -14,6 +15,7 @@ class OrderDetails
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("order:read")
      */
     private $id;
 
@@ -25,21 +27,25 @@ class OrderDetails
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("order:read")
      */
     private $product;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups("order:read")
      */
     private $quantity;
 
     /**
      * @ORM\Column(type="float")
+     * @Groups("order:read")
      */
     private $price;
 
     /**
      * @ORM\Column(type="float")
+     * @Groups("order:read")
      */
     private $total;
 

@@ -13,6 +13,12 @@
                 <a href="{{ path('app_login') }}" class="mb-0">Cliquez ici</a> pour vous connecter.
             </div>
         {% endif %}
+        {% if notification_false  %}
+            <div class="alert alert-danger" role="alert">
+                <h4 class="alert-heading">Erreur !</h4>
+                <p>{{ notification_false }}</p>
+            </div>
+        {% endif %}
         {{ form(form) }}
         <hr>
         <p class="text-center">Vous avez déjà un compte ? <a href="{{ path('app_login') }}">Connectez-vous</a></p>
