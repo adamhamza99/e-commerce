@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Classe\Cart;
+use App\Classe\Mail;
 use App\Entity\Order;
 use App\Entity\OrderDetails;
+use App\Entity\User;
 use App\Form\OrderType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -35,6 +37,7 @@ class OrderController extends AbstractController
             'user' => $this->getUser()
         ]);
 
+
         return $this->render('order/index.html.twig', [
             'form' => $form->createView(),
             'cart' => $cart->getFull()
@@ -62,7 +65,6 @@ class OrderController extends AbstractController
             if ($delivery->getCompany()) {
                 $delivery_content .= '<br/>'.$delivery->getCompany();
             }
-
             $delivery_content .= '<br/>'.$delivery->getAddress();
             $delivery_content .= '<br/>'.$delivery->getPostal().' '.$delivery->getCity();
             $delivery_content .= '<br/>'.$delivery->getCountry();
@@ -89,7 +91,7 @@ class OrderController extends AbstractController
                 //    dd($orderDetails);
                 $this->entityManager->persist($orderDetails);
             }
-                 $this->entityManager->flush();
+            $this->entityManager->flush();
 
             return $this->render('order/add.html.twig', [
                 'cart' => $cart->getFull(),
@@ -98,5 +100,28 @@ class OrderController extends AbstractController
             ]);
         }
         return $this->redirectToRoute('cart');
+    }
+
+    /**
+     * @Route("/commande/confirmation", name="order_confirm")
+     */
+    public function confirm(): Response
+    {
+        $mail = new Mail();
+        $order = $this->entityManager->getRepository(Order::class)->findOrder($this->getUser());
+        $total_price = (($order[0]->getTotal() / 100) + $order[0]->getCarrierPrice());
+    //  dd($order);
+        if($order) {
+            $content = "Bonjour ".$this->getUser()->getFullName()."<br/>Nous vous remercions pour votre commande d'un montant de : <strong>".$total_price." € </strong>.<br/><br><br/>Elle sera préparée dans notre entrepôt et vous serez livré très prochainement à l'adresse suivante : <br/><br/><i><strong> ".$order[0]->getDelivery()."</strong></i><br/><br/>À très bientot<br/>L'équipie BIGDEAL.";
+            $mail->send($this->getUser()->getEmail(), $this->getUser()->getFullName(), 'Confirmation de votre commande.', $this->getUser()->getFullName(), $content);
+
+            return $this->render('order/confirm.html.twig', [
+                'order' => $order,
+                'total_price' => $total_price,
+            ]);
+        }
+        else{
+            return $this->redirectToRoute('app_home');
+        }
     }
 }

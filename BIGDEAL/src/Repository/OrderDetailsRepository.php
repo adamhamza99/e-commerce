@@ -44,7 +44,6 @@ class OrderDetailsRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
-
     // /**
     //  * @return OrderDetails[] Returns an array of OrderDetails objects
     //  */

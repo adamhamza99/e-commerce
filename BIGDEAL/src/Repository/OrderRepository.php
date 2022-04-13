@@ -21,6 +21,33 @@ class OrderRepository extends ServiceEntityRepository
         parent::__construct($registry, Order::class);
     }
 
+
+    /*
+     * findOrder()
+     */
+    public function findOrder($user)
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.isPaid = 0')
+            ->andWhere('o.user = :user')
+            ->setParameter('user', $user)
+            ->orderBy('o.id', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /*
+   * findOrder()
+   */
+    public function findOrderById($id)
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult();
+    }
+
     /**
      * @throws ORMException
      * @throws OptimisticLockException

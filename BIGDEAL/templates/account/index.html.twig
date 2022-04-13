@@ -4,12 +4,19 @@
 
 {% block content %}
     <h1>Mon compte</h1>
-    Bienvenue {{ app.user.firstname }} dans votre compte.<br/>
+    Bienvenue {{ app.user.firstname }} {{ app.user.lastname }} dans votre compte.<br/>
+    {% if is_granted("ROLE_ADMIN") %}
+        <small><b>Vous êtes connecté en tant qu'administeur.</b> </small><br/>
+    {% endif %}
     C'est dans cet espace que vous allez pouvoir gérer toutes vos informations personnelles.
     <hr>
-    <h1>TO DO LIST</h1>
+    {% if is_granted("ROLE_ADMIN") %}
+        <a href="{{ path('admin') }}">Panel Admin</a><br/>
+        <a href="{{ path('index_api_controller') }}">Panel API</a><br/>
+    {% endif %}
     <a href="{{ path('account_password') }}">Modifier mon mot de passe </a><br/>
     <a href="{{ path('account_address') }}">Gérer mes adresses</a><br/>
-    Mes commandes
+    <a href="{{ path('account_order') }}">Voir mes commandes</a><br/>
+    <a href="{{ path('contact') }}">Contacter le service client</a><br/>
     <hr>
 {% endblock %}

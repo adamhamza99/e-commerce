@@ -1,0 +1,192 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Api Panel - BIGDEAL{% endblock %}
+
+{% block content %}
+    <div class="alert alert-warning d-flex align-items-center" role="alert">
+        <span class="position-absolute p-2 bg-danger border border-light rounded-circle mt-0*3"></span>
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+        Le point rouge siginifie connexion obigatoire.
+        <div>
+            <span class="visually-hidden"></span>
+            </span>
+        </div>
+    </div>
+    <h1>User</h1>
+    <hr>
+    <a href="{{ path("api_current_user") }}"><button type="button" class="btn btn-primary font-weight-bold align-content-center">GET<span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle ml-1">
+    <span class="visually-hidden"></span>
+  </span>
+        </button></a>
+    <h6 class="repertoire-api font-italic">/mon-api/user</h6><br/>
+    <small>Permet d'afficher les informations de l'utilisateur connecté.</small>
+    <br/>
+
+    <a href="{{ path("api_user_id", {'id': id }) }}"><button type="button" class="btn btn-primary font-weight-bold align-content-center">GET<span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle ml-1">
+    <span class="visually-hidden"></span>
+  </span>
+        </button></a>
+    <h6 class="repertoire-api font-italic">/mon-api/user/{id}</h6><br/>
+    <small>Permet d'afficher les informations d'un utilisateur en particulier.</small>
+    <br/>
+
+    <button type="button" class="btn btn-success font-weight-bold align-content-center"  data-toggle="modal" data-target="#POST_REGISTER">POST</button>
+    <h6 class="repertoire-api font-italic">/mon-api/register</h6><br/>
+    <small>Permet d'enregistrer un utilisateur en base de donnée.</small>
+    <br/>
+    <div class="modal fade" id="POST_REGISTER" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">REQUETE DE TYPE : </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="POST_REGISTER">
+                    {<br>
+                    "email" : "string",<br>
+                    "password" : "string",<br>
+                    "firstname" : "string",<br>
+                    "lastname" : "string" <br>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="copyPOST_REGISTER()">Copy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button type="button" class="btn btn-warning font-weight-bold align-content-center">PUT
+        <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle ml-1">
+    <span class="visually-hidden"></span>
+  </span>
+    </button>
+    <h6 class="repertoire-api font-italic">/mon-api/user</h6><br/>
+    <small>Permet de modifier les informations de l'utilisateur connecté.</small>
+    <br/>
+
+    <button type="button" class="btn btn-danger font-weight-bold align-content-center">DELETE
+        <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle ml-1">
+    <span class="visually-hidden"></span>
+  </span>
+    </button>    <h6 class="repertoire-api font-italic">/mon-api/user</h6><br/>
+    <small>Permet de supprimer l'utilisateur connecté de la base de donnée.</small>
+    <br/><br/>
+
+    <h1>PRODUCT</h1>
+    <hr>
+
+    <a href="{{ path("api_product") }}"><button type="button" class="btn btn-primary font-weight-bold align-content-center">GET</button></a>
+    <h6 class="repertoire-api font-italic">/mon-api/product/</h6><br/>
+    <small>Permet d'afficher la liste de tout les produits.</small>
+    <br/>
+
+    <a href="{{ path("api_product_id", {'id' : "16"}) }}"><button type="button" class="btn btn-primary font-weight-bold align-content-center">GET</button></a>
+    <h6 class="repertoire-api font-italic">/mon-api/product/{productId}</h6><br/>
+    <small>Permet d'afficher les informations d'un produit en particulier.</small>
+    <br/>
+
+    <button type="button" class="btn btn-success font-weight-bold align-content-center" data-toggle="modal" data-target="#POST_PRODUCT">POST<span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle ml-1">
+    <span class="visually-hidden"></span>
+  </span>
+    </button>
+    <h6 class="repertoire-api font-italic">/mon-api/product</h6><br/>
+    <small>Permet d'ajouter un produit dans la base de donnée.</small>
+    <div class="modal fade" id="POST_PRODUCT" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">REQUETE DE TYPE : </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="POST_PRODUCT">
+                    {<br>
+                    "name": "string",<br/>
+                    "slug": "string",<br/>
+                    "illustration": "name.jpg",<br/>
+                    "subtitle": "string",<br/>
+                    "description": "string",<br/>
+                    "price": "int",<br/>
+                    "category": {<br/>
+                    "name": "string"<br/>
+                    },<br/>
+                    "isBest": "false or true",<br/>
+                    "isNew": "false or true"<br/>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="copyPOST_PRODUCT()">Copy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/>
+
+    <button type="button" class="btn btn-warning font-weight-bold align-content-center">PUT
+        <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle ml-1">
+    <span class="visually-hidden"></span>
+  </span>
+    </button>
+    <h6 class="repertoire-api font-italic">/mon-api/product/{productId}</h6><br/>
+    <small>Permet de modifier un produit de la base de donnée.</small>
+    <br/>
+
+    <button type="button" class="btn btn-danger font-weight-bold align-content-center">DELETE
+        <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle ml-1">
+    <span class="visually-hidden"></span>
+  </span>
+    </button>    <h6 class="repertoire-api font-italic">/mon-api/product/{productId}</h6><br/>
+    <small>Permet de supprimer un produit de la base de donnée.</small>
+    <br/> <br/>
+
+    <h1>CART</h1>
+    <hr>
+
+    <a href="{{ path("api_getfull_cart") }}"><button type="button" class="btn btn-primary font-weight-bold align-content-center">GET
+            <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle ml-1">
+    <span class="visually-hidden"></span>
+  </span>
+        </button></a>
+    <h6 class="repertoire-api font-italic">/mon-api/cart/</h6><br/>
+    <small>Permet d'afficher la liste de votre panier</small>
+    <br/>
+
+    <button type="button" class="btn btn-success font-weight-bold align-content-center">POST<span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle ml-1">
+    <span class="visually-hidden"></span>
+  </span>
+    </button>
+    <h6 class="repertoire-api font-italic">/mon-api/cart/{productId}</h6><br/>
+    <small>Permet d'ajouter un produit dans son panier.</small>
+    <br/>
+
+    <button type="button" class="btn btn-danger font-weight-bold align-content-center">DELETE
+        <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle ml-1">
+    <span class="visually-hidden"></span>
+  </span>
+    </button>    <h6 class="repertoire-api font-italic">/mon-api/cart/{productId}</h6><br/>
+    <small>Permet de supprimer un produit de son panier.</small>
+    <br/><br/>
+
+    <h1>Order</h1>
+    <hr>
+    <a href="{{ path("api_order") }}"><button type="button" class="btn btn-primary font-weight-bold align-content-center">GET<span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle ml-1">
+    <span class="visually-hidden"></span>
+  </span>
+        </button></a>
+    <h6 class="repertoire-api font-italic">/mon-api/order</h6><br/>
+    <small>Permet d'afficher la liste de tout les achats de l'utilisateur connecté.</small>
+    <br/>
+    <a href="{{ path("api_order_id", {'id' : order_id }) }}"><button type="button" class="btn btn-primary font-weight-bold align-content-center">GET<span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle ml-1">
+    <span class="visually-hidden"></span>
+  </span>
+        </button></a>
+    <h6 class="repertoire-api font-italic">/mon-api/order/{orderId}</h6><br/>
+    <small>Permet d'afficher la liste d'un achat en particulier de l'utilisateur connecté.</small>
+    <br/>
+{% endblock %}

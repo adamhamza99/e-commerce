@@ -7,16 +7,32 @@
         <div class="col-md-5">
             <img src="../uploads/{{ product.illustration }}" alt="{{ product.name }}" class="img-fluid">
         </div>
-            <div class="col-md-7 my-auto">
-                <h3>{{ product.name }}</h3>
-                <p>{{ product.subtitle }}</p>
-               <span class="product-page-price">{{ (product.price / 100)| number_format(2, ',', '.')}} €</span>
-                <hr/>
-                <p>
-                    {{ product.description }}
-                </p>
-                <a href="{{ path('add_to_cart', {'id' : product.id}) }}" class="btn btn-primary">Ajoutez au panier</a>
-            </div>
+        <div class="col-md-7 my-auto">
+            <h3>{{ product.name }}</h3>
+            <p>{{ product.subtitle }}</p>
+            <span class="product-page-price">{{ (product.price / 100)| number_format(2, ',', '.')}} €</span>
+            <hr/>
+            <p>
+                {{ product.description }}
+            </p>
+            <a href="{{ path('add_to_cart', {'id' : product.id}) }}" class="btn btn-primary">Ajoutez au panier</a>
+        </div>
+        <div class="mt-5">
+            <h5>Nos meilleures ventes<p><small>Découvrez les articles les plus vendus ...</small></p></h5>
+        </div>
+        <div class="row">
+            {% for product in bestSeller %}
+                <div class="col-md-3">
+                    <img src="{{ asset('assets/img/top.png') }}" alt="{{ product.name }}" class="img-top">
+                    <div class="product-item text-center">
+                        <a href="{{ path('product', {'slug': product.slug})}}"><img src="../uploads/{{ product.illustration }}" alt="{{ product.name }}" class="img-fluid"></a>
+                        <h5>{{ product.name }}</h5>
+                        <span class="product-subtitle">{{ product.subtitle }}</span>
+                        <span class="product-price">{{ (product.price / 100)| number_format(2, ',', '.')}} €</span>
+                    </div>
+                </div>
+            {% endfor %}
+        </div><!-- /.row -->
     </div>
 
 {% endblock %}

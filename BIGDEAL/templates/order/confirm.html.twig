@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paiement de ma commande - BIGDEAL{% endblock %}
+
+{% block content %}
+    <a href="{{ path('account_order') }}" class="btn btn-info btn-sm float-right">Voir mes commandes</a>
+    <h2>Confirmation de commande</h2>
+<p class="text-center">
+    Bonjour <strong> {{ app.user.firstname }} {{ app.user.lastname }}</strong>,<br/><br/>
+    Nous vous remercions pour votre commande d'un montant de <strong>{{ total_price }} € </strong>.<br/>
+    Une confirmation vient de vous être envoyée par email à l'adresse suivante <strong> {{ order.0.user.email }}</strong>.
+<hr>
+</p>
+<p class="text-center">
+    Votre commande sera livrée par <strong> {{ order.0.carriername|split('[')[0]|raw }}
+        <br/>
+    </strong> à l'adresse suivante : <br/>
+    <br/>
+    {{ order.0.orderDetails.owner.delivery|replace({"FR" : "FRANCE"})|raw}}
+</p>
+    {% endblock %}

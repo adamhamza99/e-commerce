@@ -2,12 +2,15 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\OrderRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
+ * @ApiResource
  * @ORM\Entity(repositoryClass=OrderRepository::class)
  * @ORM\Table(name="`order`")
  */
@@ -17,6 +20,7 @@ class Order
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("order:read")
      */
     private $id;
 
@@ -29,31 +33,37 @@ class Order
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups("order:read")
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("order:read")
      */
     private $carrierName;
 
     /**
      * @ORM\Column(type="float")
+     * @Groups("order:read")
      */
     private $carrierPrice;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups("order:read")
      */
     private $delivery;
 
     /**
-     * @ORM\OneToMany(targetEntity=OrderDetails::class, mappedBy="myOrder")
+     * @ORM\OneToMany(targetEntity=OrderDetails::class, mappedBy="myOrder", orphanRemoval=true,cascade={"persist"})
+     * @Groups("order:read")
      */
     private $orderDetails;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups("order:read")
      */
     private $isPaid;
 

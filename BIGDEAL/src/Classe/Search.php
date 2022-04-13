@@ -10,6 +10,7 @@ class Search
      */
     public $string = '';
 
+
     /**
      * @var Category[]
      */

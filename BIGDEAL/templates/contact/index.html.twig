@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact - BIGDEAL{% endblock %}
+
+{% block content %}
+    <h1>Nous contacter</h1>
+    <small>N'hésitez pas à prendre contact avec notre équipe, nous vous répondrons dans les plus bref délais.</small>
+    <div class="row">
+        <div class="col-md-8">
+            <hr>
+            {% if notification_valid  %}
+                <div class="alert alert-success" role="alert">
+                    <h4 class="alert-heading">Succès !</h4>
+                    <p>{{ notification_valid }}</p>
+                </div>
+            {% endif %}
+            {{ form(form) }}
+        </div>
+        <div class="col-md-4 mt-5">
+            <strong>BIGDEAL Support</strong><br/>
+            <hr>
+            01 43 88 55 23<br/>
+            63 Boulevard Haussmann, 75008 PARIS <br/>
+            support@bigdeal.fr
+        </div>
+    </div>
+{% endblock %}
